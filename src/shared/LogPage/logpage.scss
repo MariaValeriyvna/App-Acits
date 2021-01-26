@@ -1,0 +1,69 @@
+.logpage {
+  position: relative;
+  width: 100vw;
+  height: 100vh;
+  .form {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 400px;
+    border-radius: 12px;
+    background-color: white;
+    padding: 35px;
+    font-size: 18px;
+    font-weight: 500;
+    color: hsl(233, 66%, 64%);
+
+    .fieldset {
+      padding: 20px;
+      border: 1px solid hsl(233, 66%, 64%);
+      border-radius: 12px;
+    }
+    .inputText {
+      width: 100%;
+      margin: 10px 0;
+      padding: 10px;
+      border: 1px solid #d9d9d9;
+      border-radius: 12px;
+      font-size: 16px;
+      color: rgb(65, 64, 64);
+      cursor: pointer;
+      &::placeholder {
+        font-family: Roboto;
+        font-size: 14px;
+      }
+      &:focus {
+        outline: none;
+        border: 1px solid hsl(233, 66%, 64%);
+      }
+    }
+    .btn {
+      width: 100%;
+      margin: 10px 0;
+      padding: 10px 0;
+      background-color: #6775e0;
+      border: 1px solid transparent;
+      border-radius: 12px;
+      font-size: 20px;
+      color: white;
+      cursor: pointer;
+      &:focus,
+      &:hover {
+        outline: none;
+        background-color: rgba(103, 117, 224, 0.8);
+      }
+      &:active {
+        outline: none;
+        background-color: white;
+        color: rgba(103, 117, 224);
+        border: 1px solid hsl(233, 66%, 64%);
+      }
+    }
+    .empty {
+      height: 20px;
+      color: red;
+      font-size: 12px;
+    }
+  }
+}

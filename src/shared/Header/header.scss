@@ -1,0 +1,34 @@
+.header {
+  display: flex;
+  width: 90vw;
+  margin: 20px auto;
+  justify-content: space-evenly;
+  flex-wrap: wrap;
+
+  .link {
+    display: block;
+    color: white;
+    font-size: 20px;
+    width: 200px;
+    margin: 10px 0;
+    padding: 10px 0;
+    background-color: #6775e0;
+    border: 1px solid transparent;
+    border-radius: 12px;
+    text-align: center;
+    cursor: pointer;
+
+    &:focus,
+    &:hover {
+      outline: none;
+      background-color: rgba(103, 117, 224, 0.8);
+    }
+
+    &:active {
+      outline: none;
+      background-color: white;
+      color: rgba(103, 117, 224);
+      border: 1px solid hsl(233, 66%, 64%);
+    }
+  }
+}

@@ -1,0 +1,21 @@
+.animalcard {
+  width: 200px;
+  margin: 20px;
+  padding: 15px;
+  border: 1px solid #6775e0;
+  border-radius: 20px;
+  text-align: center;
+  color: #6775e0;
+
+  &:focus,
+  &:hover {
+    outline: none;
+    box-shadow: 0px 5px 10px 2px rgba(103, 117, 224, 0.2);
+  }
+  .animalname {
+    cursor: pointer;
+    &:hover {
+      text-decoration: underline;
+    }
+  }
+}
