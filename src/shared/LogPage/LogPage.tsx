@@ -3,6 +3,7 @@ import { ChangeEvent } from "react";
 import { useDispatch } from "react-redux";
 import { Redirect } from "react-router-dom";
 import { updateAnimals, updateToday } from "../../store/actions";
+import { PreLoader } from "../Preloader";
 
 import styles from "./logpage.scss";
 
@@ -12,6 +13,7 @@ export function LogPage(): JSX.Element {
   const [login, setLogin] = useState("");
   const [password, setPassword] = useState("");
   const [empty, setEmpty] = useState(true);
+  const [load, setLoad] = useState(false);
 
   useEffect(() => {
     if (!empty) {
@@ -34,6 +36,7 @@ export function LogPage(): JSX.Element {
           } else {
             setEmpty(true);
           }
+          setLoad(false);
         })
         .catch(console.log);
     }
@@ -45,6 +48,7 @@ export function LogPage(): JSX.Element {
       setEmpty(true);
       setFormTouch(true);
     } else {
+      setLoad(true);
       setEmpty(false);
       setFormTouch(true);
     }
@@ -99,6 +103,7 @@ export function LogPage(): JSX.Element {
           </fieldset>
         </form>
       )}
+      <div>{load && <PreLoader />}</div>
     </div>
   );
 }

@@ -4,6 +4,7 @@ import { Redirect } from "react-router-dom";
 import { updateToday } from "../../store/actions";
 import { IPropsToday, RootState } from "../../store/store";
 import { Header } from "../Header";
+import { PreLoader } from "../Preloader";
 import { CardTodayPage } from "./CardTodayPage";
 import styles from "./todaypage.scss";
 
@@ -11,6 +12,7 @@ export function TodayPage(): JSX.Element {
   const token = localStorage.getItem("tokenAcits");
   const nowDate = new Date().toLocaleDateString();
   const [error, setError] = useState(false);
+  const [load, setLoad] = useState(false);
   const dispatch = useDispatch();
   const results = useSelector<RootState, Array<IPropsToday>>(
     (state) => state.today
@@ -18,6 +20,7 @@ export function TodayPage(): JSX.Element {
   useEffect(() => {
     if (results && results.length > 1) return;
     if (token) {
+      setLoad(true);
       fetch("https://acits-api.herokuapp.com/api/v1/prescriptions/today", {
         headers: { Authorization: `Bearer ${token}`, "current-shelter": "1" },
       })
@@ -28,12 +31,14 @@ export function TodayPage(): JSX.Element {
             localStorage.setItem("tokenAcits", "");
           }
           dispatch(updateToday(data.results));
+          setLoad(false);
         })
         .catch(console.log);
     }
   }, [token]);
   return (
     <div className={styles.todaypageContainer}>
+      <div>{load && <PreLoader />}</div>
       <Header />
       <h1>Сегодня {nowDate}</h1>
       <ul className={styles.todaypage}>

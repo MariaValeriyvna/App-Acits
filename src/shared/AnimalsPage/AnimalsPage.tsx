@@ -3,14 +3,15 @@ import { useDispatch, useSelector } from "react-redux";
 import { Redirect } from "react-router-dom";
 import { updateAnimals } from "../../store/actions";
 import { IPropsAnimals, RootState } from "../../store/store";
-import { AnimalModal } from "../AnimalModal";
 import { Header } from "../Header";
+import { PreLoader } from "../Preloader";
 import styles from "./animalspage.scss";
 import { CardAnimalsPage } from "./CardAnimallsPage";
 
 export function AnimalsPage(): JSX.Element {
   const token = localStorage["tokenAcits"];
   const [error, setError] = useState(false);
+  const [load, setLoad] = useState(false);
   const results = useSelector<RootState, Array<IPropsAnimals>>(
     (state) => state.animals
   );
@@ -18,6 +19,7 @@ export function AnimalsPage(): JSX.Element {
   useEffect(() => {
     if (results.length > 1) return;
     if (token) {
+      setLoad(true);
       fetch("https://acits-api.herokuapp.com/api/v1/animals", {
         headers: { Authorization: `Bearer ${token}`, "current-shelter": "1" },
       })
@@ -29,6 +31,7 @@ export function AnimalsPage(): JSX.Element {
               localStorage.setItem("tokenAcits", "");
             }
             dispatch(updateAnimals(data.results));
+            setLoad(false);
           }
         })
         .catch(console.log);
@@ -36,6 +39,7 @@ export function AnimalsPage(): JSX.Element {
   }, [token]);
   return (
     <div className={styles.animalspageContainer}>
+       <div>{load && <PreLoader />}</div>
       <Header />
       <h1>Животные Приюта №1</h1>
       <ul className={styles.animalspage}>
